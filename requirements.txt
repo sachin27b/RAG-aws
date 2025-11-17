@@ -1,0 +1,12 @@
+ipykernel
+flask
+werkzeug
+langchain
+python-dotenv
+boto3
+chromadb
+awscli
+nltk
+PyPDF2
+tiktoken
+groq

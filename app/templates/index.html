@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>KB Manager</title>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>Knowledge Base Manager</h1>
+      <p class="subtitle">Upload PDFs → Ingest to Bedrock → Query with LLM</p>
+    </div>
+  </header>
+
+  <main class="container grid">
+    <!-- Upload card -->
+    <section class="card">
+      <h2>Upload PDF</h2>
+      <form id="uploadForm">
+        <label class="file-label">
+          <input type="file" id="pdfFile" accept="application/pdf" />
+          <span class="file-placeholder">Choose a PDF file</span>
+        </label>
+
+        <div class="row">
+          <label for="chunkSize">Chunk size (pages):</label>
+          <input id="chunkSize" type="number" min="1" value="50" />
+        </div>
+
+        <button type="submit" class="btn">Upload & Chunk</button>
+      </form>
+      <div class="log" id="uploadLog" aria-live="polite"></div>
+    </section>
+
+    <!-- Ingest card -->
+    <section class="card">
+      <h2>Start Ingestion</h2>
+      <p>After upload, trigger the ingestion job to put content into the knowledge base.</p>
+      <div class="row">
+        <button id="ingestBtn" class="btn outline">Start Ingestion</button>
+        <button id="pollStopBtn" class="btn danger" hidden>Stop Polling</button>
+      </div>
+      <div class="log" id="ingestLog" aria-live="polite"></div>
+    </section>
+
+    <!-- Query card -->
+    <section class="card large">
+      <h2>Ask the KB</h2>
+      <form id="queryForm">
+        <textarea id="queryText" rows="3" placeholder="Type your question e.g. Who were the board of directors?"></textarea>
+
+        <div class="row">
+          <label for="topK">Top results:</label>
+          <input id="topK" type="number" min="1" max="10" value="3" />
+          <button type="submit" class="btn">Query</button>
+        </div>
+      </form>
+
+      <div id="queryResult" class="result">
+        <h3>Answer</h3>
+        <pre id="answerText">No answer yet.</pre>
+
+        <h4>Context (retrieved)</h4>
+        <div id="contextText" class="context">—</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>Deployment tips: run behind Gunicorn + Nginx. Secure endpoints with auth tokens.</small>
+    </div>
+  </footer>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
