@@ -16,7 +16,7 @@ A production-ready Flask application for PDF document processing with AWS Bedroc
 ## Project Structure
 
 ```
-flask-kb-app/
+RAG-aws/
 │
 ├── app/
 │   ├── __init__.py
@@ -98,7 +98,6 @@ GROQ_API_KEY=your_groq_api_key
 
 ```
 
-**Note**: Never commit your `.env` file to version control.
 
 ## Usage
 
